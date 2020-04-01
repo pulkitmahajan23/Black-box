@@ -7,8 +7,8 @@
 #define FIREBASE_HOST "***********.firebaseio.com"                          // the project name address from firebase id
 #define FIREBASE_AUTH "***************************************"            // the secret key generated from firebase
 
-#define WIFI_SSID "Pulkit"                                             // input your home or public wifi name 
-#define WIFI_PASSWORD "pulkit123"                                    //password of wifi ssid                     
+#define WIFI_SSID "**********"                                             // input your home or public wifi name 
+#define WIFI_PASSWORD "**************"                                    //password of wifi ssid                     
 
 MPU6050 mpu6050(Wire);
 FirebaseData firebase;
@@ -41,6 +41,9 @@ void setup() {
   Firebase.setFloat(firebase,"/GyroOffSet/X",mpu6050.getGyroX());
   Firebase.setFloat(firebase,"/GyroOffSet/Y",mpu6050.getGyroY());
   Firebase.setFloat(firebase,"/GyroOffSet/Z",mpu6050.getGyroZ());
+  Firebase.setFloat(firebase,"/Accel/X",mpu6050.getAccX());
+  Firebase.setFloat(firebase,"/Accel/Y",mpu6050.getAccY());
+  Firebase.setFloat(firebase,"/Accel/Z",mpu6050.getAccZ());
   temp=analogRead(lm35);
   temp=(temp*330)/1024.0;
   Firebase.setFloat(firebase,"/Engine_Temperature",temp);
@@ -54,4 +57,13 @@ void loop()
   mpu6050.update();
   temp=(temp*330)/1024.0;
   Firebase.pushInt(firebase,"/Engine_Temperature",temp);
+  Firebase.pushFloat(firebase,"/Accel/X",mpu6050.getGyroX());
+  Firebase.pushFloat(firebase,"/GyroOffSet/Y",mpu6050.getGyroY());
+  Firebase.pushFloat(firebase,"/GyroOffSet/Z",mpu6050.getGyroZ());
+  Firebase.pushFloat(firebase,"/Accel/X",mpu6050.getAccX());
+  Firebase.pushFloat(firebase,"/Accel/Y",mpu6050.getAccY());
+  Firebase.pushFloat(firebase,"/Accel/Z",mpu6050.getAccZ());
+  emission=gassensor.getPPM();
+  Firebase.pushFloat(firebase,"/Emission_Value",emission);
+  delay(1000);
 }
