@@ -4,7 +4,7 @@ Similar to how a black box is used in an airplane after a crash occurs to determ
 
 The device tracks a cars features current features like the speed, its trajectory, carbon emission and the engine temperature and sends the data to Firebase for storage and viewing purposes.
 
-##Components used
+## Components used
 * ESP32
 * MPU6050
 * MQ135
